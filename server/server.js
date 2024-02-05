@@ -12,6 +12,10 @@ const db = mysql.createConnection({
     database: "test"
 })
 
+// Parsing del corpo incorporato in Express
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.get('/', (req, res) => {
     return res.json("ciao del Server");
 })

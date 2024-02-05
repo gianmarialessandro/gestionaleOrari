@@ -1,55 +1,20 @@
-import { useEffect, useState } from 'react'
-
-function App() {
-  const [data, setData] = useState([{}]);
-  // useEffect(() => {
-  //   fetch('http://localhost:8081/orari')
-  //   .then(res => res.json())
-  //   .then(data => console.log(data))
-  //   .then(data => setData(data))
-  //   .catch(err => console.log(err))
-  // }, [])
+import { Link } from 'react-router-dom';
+import './App.css';
 
 
-  useEffect(() => {
-    fetch('http://localhost:8081/orari')
-    .then(
-      response => response.json()
-    )
-    .then(
-      data => {
-        setData(data)
-      }
-    )
-  }, [])
-
+const App = () => {
   return (
     <div>
-      <table>
-      <thead>
-        <th>nome</th>
-        <th>congnome</th>
-        <th>età</th>
-        <th>matricola</th>
-      </thead>
-      <tbody>
+ <div className="d-flex align-items-center justify-content-center vh-100">
+      <div className="text-center">
+        <h1 className="mb-4">Benvenuto!</h1>
+        <div className="d-flex justify-content-center">
+          <Link to='login'><button className="btn btn-primary rounded-pill px-4 mx-2">Login</button></Link>
+          <Link to='signup'> <button className="btn btn-success rounded-pill px-4 mx-2">Sign Up</button></Link>
+        </div>
+      </div>
+    </div>    </div>
+    );
+};
 
-         {( typeof data === 'undefined') ? (<p>Loading...</p>)
-      :
-      (
-        data.map((user, i) => (
-          <tr key={i}>
-           <td>{user.nome}</td>
-           <td>{user.cognome}</td>
-           <td>{user.eta}</td>
-           <td>{user.id}</td> 
-          </tr>
-        ))
-      )}
-      </tbody>
-      </table>
-    </div>
-  )
-}
-
-export default App
+export default App;
