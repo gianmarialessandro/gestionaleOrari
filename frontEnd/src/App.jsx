@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import './App.css';
+import Lottie from 'lottie-react';
+import pointAnimation from './assets/pointAnimation.json';
 
 
 const App = () => {
@@ -7,6 +9,7 @@ const App = () => {
     <div>
  <div className="d-flex align-items-center justify-content-center vh-100">
       <div className="text-center">
+        <Lottie animationData={pointAnimation}/>
         <h1 className="mb-4">Benvenuto!</h1>
         <div className="d-flex justify-content-center">
           <Link to='login'><button className="btn btn-primary rounded-pill px-4 mx-2">Login</button></Link>

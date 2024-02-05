@@ -7,6 +7,7 @@
 react-vite  
 react-router-dom 6..21.3  
 react-bootstrap 5.3.2  
+lottie-react
 
 --- 
 
