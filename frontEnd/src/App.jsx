@@ -11,6 +11,7 @@ const App = () => {
         <div className="d-flex justify-content-center">
           <Link to='login'><button className="btn btn-primary rounded-pill px-4 mx-2">Login</button></Link>
           <Link to='signup'> <button className="btn btn-success rounded-pill px-4 mx-2">Sign Up</button></Link>
+          <Link to='utenti'> <button className="btn btn-success rounded-pill px-4 mx-2">Utenti</button></Link>
         </div>
       </div>
     </div>    </div>

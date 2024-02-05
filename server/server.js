@@ -9,7 +9,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "test"
+    database: "gestionale_orari"
 })
 
 // Parsing del corpo incorporato in Express
@@ -20,10 +20,10 @@ app.get('/', (req, res) => {
     return res.json("ciao del Server");
 })
 
-app.get('/orari', (req, res) => {
-    const sql = "SELECT * FROM orari";
+app.get('/utenti', (req, res) => {
+    const sql = "SELECT * FROM azienda";
     db.query(sql, (err, data) => {
-        if(err) return res.json(err);
+        if(err) return console.log(res.json(err));
         return res.json(data)
     })
 })
