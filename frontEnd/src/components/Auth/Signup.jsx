@@ -1,45 +1,78 @@
 import { useState } from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
+
+  const navigate = useNavigate();
+
+  const [utente, setUtente] = useState({
+    name: "",
+    email: "",
+    password: "",
+    azienda: "",
+    telefono: "",
+  });
+  // const [email, setEmail] = useState("");
   const [confirmationEmail, setConfirmationEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [password, setPassword] = useState("");
   const [confirmationPassword, setConfirmationPassword] = useState("");
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
   const [nameStd, setNameStd] = useState(true);
   const [allowEmail, setAllowEmail] = useState(false);
   const [emailStd, setEmailStd] = useState(false);
   const [allowPassword, setAllowPassword] = useState(false);
   const [passwordStd, setPasswordStd] = useState(false);
-  const [aziendaStd, setAziendaStd] =useState(false);
+  const [aziendaStd, setAziendaStd] = useState(false);
+  const [telefonoStd, setTelefonoStd] = useState(false);
 
   const handleNameChange = (e) => {
-    setName(e.target.value);
+    setUtente({
+      ...utente,
+      name: e.target.value,
+    });
   };
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    setUtente({
+      ...utente,
+      email: e.target.value,
+    });
   };
 
   const handleConfirmationEmailChange = (e) => {
     setConfirmationEmail(e.target.value);
-    if (e.target.value === email && e.target.value !== "") setAllowEmail(true);
+    if (e.target.value === utente.email && e.target.value !== "")
+      setAllowEmail(true);
     else setAllowEmail(false);
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    setUtente({
+      ...utente,
+      password: e.target.value,
+    });
   };
 
   const handleConfirmationPasswordChange = (e) => {
     setConfirmationPassword(e.target.value);
-    if (e.target.value === password) setAllowPassword(true);
+    if (e.target.value === utente.password) setAllowPassword(true);
     else setAllowPassword(false);
   };
-  
+
   const handleAziendaChange = (e) => {
-    setAziendaStd(e.target.value);
+    setUtente({
+      ...utente,
+      azienda: e.target.value,
+    });
+  };
+
+  const handleTelefonoChange = (e) => {
+    setUtente({
+      ...utente,
+      telefono: e.target.value,
+    });
   };
 
   const handleNameClick = (e) => {
@@ -55,13 +88,31 @@ const Signup = () => {
     setTimeout(() => {
       setEmailStd(!emailStd);
       setPasswordStd(!passwordStd);
-    }, 300)
+    }, 300);
+  };
+
+  const handlePasswordClick = (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+      setPasswordStd(!passwordStd);
+      setAziendaStd(!aziendaStd);
+    }, 300);
+  };
+
+  const handleAziendaClick = (e) => {
+    e.preventDefault();
+    setTimeout(() => {
+      setAziendaStd(!aziendaStd);
+      setTelefonoStd(!telefonoStd);
+    }, 300);
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(email, password);
-    // Aggiungi qui la logica di gestione della registrazione o del login
+    console.log(utente);
+    navigate("/")
+
+      // Aggiungi qui la logica di gestione della registrazione o del login
   };
 
   return (
@@ -76,12 +127,11 @@ const Signup = () => {
                   <Form onSubmit={handleFormSubmit}>
                     {/* NOME */}
                     {nameStd ? (
-                      <Form.Group controlId="formName">
-                        {/* <Form.Label>Nome e Cognome</Form.Label> */}
+                      <Form.Group controlId="formName" className="p-1 m-1">
                         <Form.Control
                           type="name"
                           placeholder="Inserisci il tuo nome e cognome"
-                          value={name}
+                          value={utente.name}
                           onChange={handleNameChange}
                         />
                       </Form.Group>
@@ -92,17 +142,20 @@ const Signup = () => {
                       {/* EMAIL */}
                       {emailStd ? (
                         <>
-                          <Form.Group controlId="formEmail" className="p-3 m-2">
-                            <Form.Label>{name}</Form.Label>
+                          <Form.Group controlId="formEmail" className="p-1 m-1">
+                            <Form.Label>{utente.name}</Form.Label>
                             <Form.Control
                               type="email"
                               placeholder="Inserisci la tua email"
-                              value={email}
+                              value={utente.email}
                               onChange={handleEmailChange}
                             />
                           </Form.Group>
 
-                          <Form.Group controlId="formConfermationEmail" className="p-3 m-2">
+                          <Form.Group
+                            controlId="formConfermationEmail"
+                            className="p-1 m-1"
+                          >
                             <Form.Control
                               type="email"
                               placeholder="Conferma la tua email"
@@ -128,17 +181,23 @@ const Signup = () => {
                     {/* PASSWORD */}
                     {passwordStd ? (
                       <>
-                        <Form.Group controlId="formPassword">
+                        <Form.Group
+                          controlId="formPassword"
+                          className="p-1 m-1"
+                        >
                           {/* <Form.Label>Password</Form.Label> */}
                           <Form.Control
                             type="password"
                             placeholder="Inserisci la tua password"
-                            value={password}
+                            value={utente.password}
                             onChange={handlePasswordChange}
                           />
                         </Form.Group>
 
-                        <Form.Group controlId="formConfirmationPassword">
+                        <Form.Group
+                          controlId="formConfirmationPassword"
+                          className="p-1 m-1"
+                        >
                           {/* <Form.Label>Conferma Password</Form.Label> */}
                           <Form.Control
                             className={
@@ -164,42 +223,85 @@ const Signup = () => {
                       <></>
                     )}
 
-                     {/* AZIENDA */}
-                     {aziendaStd ? (
-                      <Form.Group controlId="formName">
-                        {/* <Form.Label>Nome e Cognome</Form.Label> */}
+                    {/* AZIENDA */}
+                    {aziendaStd ? (
+                      <Form.Group controlId="formName" className="p-1 m-1">
                         <Form.Control
                           type="name"
-                          placeholder="Inserisci il nome della azienda che rappresenti"
-                          value={name}
+                          placeholder="nome dell'azienda"
+                          value={utente.azienda}
                           onChange={handleAziendaChange}
                         />
                       </Form.Group>
                     ) : (
-                      <div></div>
+                      <></>
+                    )}
+
+                    {/* TELEFONO */}
+                    {telefonoStd ? (
+                      <Form.Group controlId="formName" className="p-1 m-1">
+                        <Form.Control
+                          type="name"
+                          placeholder="telefono per comunicazioni"
+                          value={utente.telefono}
+                          onChange={handleTelefonoChange}
+                        />
+                      </Form.Group>
+                    ) : (
+                      <></>
                     )}
 
                     {/* PROCEDI INVIO */}
                     {nameStd ? (
                       <Button
-                        variant="info"
+                        variant="primary"
                         type="button"
                         onClick={handleNameClick}
                       >
-                        prossimo
+                        Invia
                       </Button>
                     ) : (
                       <></>
                     )}
                     {emailStd ? (
-                      <Button variant="info" type="button" onClick={handleEmailClick}>
-                        prossimo
+                      <Button
+                        variant="primary"
+                        type="button"
+                        onClick={handleEmailClick}
+                      >
+                        Invia
                       </Button>
                     ) : (
                       <></>
                     )}
                     {passwordStd ? (
-                      <Button variant="primary" type="submit">
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={handlePasswordClick}
+                      >
+                        Invia
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
+                    {aziendaStd ? (
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={handleAziendaClick}
+                      >
+                        Invia
+                      </Button>
+                    ) : (
+                      <></>
+                    )}
+                    {telefonoStd ? (
+                      <Button
+                        variant="primary"
+                        type="submit"
+                        onClick={handleFormSubmit}
+                      >
                         Invia
                       </Button>
                     ) : (
@@ -209,6 +311,11 @@ const Signup = () => {
                 </Col>
               </Row>
             </Container>
+          </div>
+          <div>
+            {Object.values(utente).map((e, i) => (
+              <p key={i}>{e}</p>
+            ))}
           </div>
         </div>
       </div>
