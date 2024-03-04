@@ -19,35 +19,37 @@ function App() {
     .then(
       data => {
         setData(data)
+        console.log(data)
       }
     )
   }, [])
 
   return (
     <div>
-      <table>
-      <thead>
+       {/* <table> */}
+      {/*<thead>
         <th>nome</th>
         <th>congnome</th>
         <th>età</th>
         <th>matricola</th>
-      </thead>
-      <tbody>
+      </thead> */}
+      {/* <tbody> */}
 
          {( typeof data === 'undefined') ? (<p>Loading...</p>)
       :
       (
-        data.map((user, i) => (
-          <tr key={i}>
-           <td>{user.nome}</td>
-           <td>{user.cognome}</td>
+        <p>{data.nome}</p>
+        // data.map((user, i) => (
+        //   <tr key={i}>
+          //  <td>{user.nome}</td>
+           /* <td>{user.cognome}</td>
            <td>{user.eta}</td>
-           <td>{user.id}</td> 
-          </tr>
-        ))
+           <td>{user.id}</td>  */
+          // </tr>
+        // ))
       )}
-      </tbody>
-      </table>
+      {/* </tbody>
+      </table> */}
     </div>
   )
 }

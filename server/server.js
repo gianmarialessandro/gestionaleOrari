@@ -17,9 +17,10 @@ app.get('/', (req, res) => {
 })
 
 app.get('/orari', (req, res) => {
-    const sql = "SELECT * FROM orari";
+    const sql = "SELECT * FROM tabella_test";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
+        console.log(data)
         return res.json(data)
     })
 })
