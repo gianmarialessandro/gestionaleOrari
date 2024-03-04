@@ -38,7 +38,7 @@ function App() {
          {( typeof data === 'undefined') ? (<p>Loading...</p>)
       :
       (
-        <p>{data.nome}</p>
+        <p>{data.map((u, i) => (<h5 key={i}>{u.nome}</h5>))}</p>
         // data.map((user, i) => (
         //   <tr key={i}>
           //  <td>{user.nome}</td>
