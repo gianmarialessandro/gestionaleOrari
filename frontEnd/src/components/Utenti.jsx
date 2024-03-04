@@ -4,7 +4,7 @@ function Utenti() {
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
-    fetch("http://localhost:8081/utenti")
+    fetch("http://localhost:8081/signup")
       .then((response) => response.json())
       .then((data) => {
         console.log(data); // Controlla se i dati sono corretti qui
